@@ -111,3 +111,22 @@ select * from regioes
 select * from descobridores
 select * from eras
 select * from dinossauros
+
+
+
+
+
+select 
+dinossauros.id, dinossauros.nome, dinossauros.toneladas,
+dinossauros.inicio, dinossauros.fim,
+grupos.nome as Grupo, eras.nome as Era,
+descobridores.nome as Descobridor, 
+regioes.nome as Região
+from dinossauros
+join grupos on dinossauros.fk_grupo = grupos.id
+join eras on eras.id = dinossauros.fk_era
+join descobridores on descobridores.id = dinossauros.fk_descobridor
+join regioes on regioes.id = dinossauros.fk_regiao
+order by dinossauros.nome
+
+
