@@ -29,6 +29,55 @@ where id = 2
 
 update inventoriocarros set ano = 2012 where id = 2
 
+
+
+	
+alter table inventoriocarros set (system_versioning = off)
+drop table inventoriocarros
+
+create table inventoriocarros
+(
+	id integer primary key identity,
+	ano integer,
+	marca varchar(20),
+	cor varchar(15),
+	kilometragem integer,
+	emEstoque bit not null default 1,
+	SysStartTime datetime2 generated always as row start not null,
+	SysEndTime datetime2 generated always as row end not null,
+	period for system_time (SysStartTime, SysEndTime)
+)
+with
+(  
+	SYSTEM_VERSIONING = ON   
+	( history_table = dbo.HistoricoInventorioCarros ) 
+)
+
+
+insert into inventoriocarros (ano, marca, cor, kilometragem)
+values ('1985', 'Shelby Cobra', 'Azul', 719544);
+
+insert into inventoriocarros (ano, marca, cor, kilometragem)
+values ('2016', 'Toyota Hilux', 'Prata', 45544);
+
+insert into inventoriocarros (ano, marca, cor, kilometragem)
+values ('2025', 'BYD Dolphin', 'Abacate', 22156);
+
+insert into inventoriocarros (ano, marca, cor, kilometragem)
+values ('1983', 'Monza', 'Areia', 719544);
+
+select * from inventoriocarros
+for system_time all
+where id = 2
+
+
+select * from dbo.HistoricoInventorioCarros
+
+update inventoriocarros set ano = 2012 where id = 2
+
+
+	
+
 -- PostgreSql
 create table inventorio_carros (
   id              bigint generated always as identity primary key,
@@ -56,8 +105,6 @@ create table inventorio_carros_hist (
 
 create index on inventorio_carros_hist (id, sys_end_time);
 
--- carimbo de tempo alvo
--- exemplo: '2026-03-01 10:00:00-03'
 
 select *
 from inventorio_carros
