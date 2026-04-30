@@ -1,0 +1,13 @@
+Desenvolva um sistema de Vendas utilizando Java Swing
+O sistema deve conter telas para:
+- Cadastro de produtos
+- Cadastro de Clientes
+- Cadastro de Notas Fiscais
+OBS: CRUD completo para cada uma das entidades.
+
+Extras/Bônus
+- Imprimir Nota Fiscal (Gerar PDF - dica: pesquisar sobre iText)
+- Enviar dados da Nota Fiscal por Email
+
+Dicas:
+- Entidades: Produtos, Clientes, NotasFicais, ItensNotaFiscal
